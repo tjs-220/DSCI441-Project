@@ -36,4 +36,4 @@ def train_svm():
 
     evaluate_model(grid, X_test, y_test, model_name="SVM")
 
-    return
+    return grid

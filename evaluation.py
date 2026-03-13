@@ -7,9 +7,11 @@ evaluation
 Taylor Schultz
 """
 
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib
+matplotlib.use('Qt5Agg')
 import matplotlib.pyplot as plt
 import seaborn as sns
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 
 
 def evaluate_model(model, X_test, y_test, model_name="Model"):
@@ -25,4 +27,5 @@ def evaluate_model(model, X_test, y_test, model_name="Model"):
     plt.title(f"{model_name} Confusion Matrix")
     plt.xlabel("Predicted")
     plt.ylabel("Actual")
+    plt.tight_layout()
     plt.show()

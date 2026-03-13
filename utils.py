@@ -10,9 +10,11 @@ Taylor Schultz
 import time
 import psutil
 import os
+import functools
 
 
 def measure_time(func):
+    @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start = time.time()
         result = func(*args, **kwargs)

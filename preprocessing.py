@@ -37,7 +37,8 @@ def load_data():
 def build_preprocessor(df):
     categorical_cols = df.select_dtypes(include=["object"]).columns.tolist()
     numeric_cols = df.select_dtypes(exclude=["object"]).columns.tolist()
-    numeric_cols.remove("income") if "income" in numeric_cols else None
+    if "income" in numeric_cols:
+        numeric_cols.remove("income")
 
     categorical_transformer = OneHotEncoder(handle_unknown="ignore")
     numeric_transformer = StandardScaler()
