@@ -16,8 +16,10 @@ from evaluation import evaluate_model
 
 def train_rf():
     df = load_data()
-    preprocessor, _, _ = build_preprocessor(df)
     X_train, X_test, y_train, y_test = split_data(df)
+
+    # Build preprocessor on features only (no 'income')
+    preprocessor, _, _ = build_preprocessor(df.drop(columns=["income"]))
 
     rf = RandomForestClassifier()
 
