@@ -7,7 +7,7 @@ train_svm
 Taylor Schultz
 """
 
-from sklearn.svm import SVC
+from sklearn.svm import LinearSVC
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import GridSearchCV
 from preprocessing import load_data, build_preprocessor, split_data
@@ -21,7 +21,7 @@ def train_svm():
     # Build preprocessor on features only (no 'income')
     preprocessor, _, _ = build_preprocessor(df.drop(columns=["income"]))
 
-    svm = SVC(kernel="rbf")
+    svm = LinearSVC(kernel="rbf")
 
     pipe = Pipeline(steps=[
         ("preprocessor", preprocessor),
@@ -29,11 +29,11 @@ def train_svm():
     ])
 
     param_grid = {
-        "svm__C": [0.1, 1, 10],
-        "svm__gamma": ["scale", "auto"]
+    "svm__C": [1],
+    "svm__gamma": ["scale"]
     }
 
-    grid = GridSearchCV(pipe, param_grid, cv=3, n_jobs=-1)
+    grid = GridSearchCV(pipe, param_grid, cv=2, n_jobs=-1)
     grid.fit(X_train, y_train)
 
     evaluate_model(grid, X_test, y_test, model_name="SVM")
