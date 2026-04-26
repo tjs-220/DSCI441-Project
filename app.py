@@ -91,8 +91,12 @@ def main():
             st.success("Random Forest training complete.")
             evaluate_model_streamlit(model, X_test, y_test, model_name="Random Forest")
 
-            st.subheader("Best Hyperparameters (Random Forest)")
-            st.json(model.best_params_)
+            st.subheader("Best Hyperparameters (SVM)")
+            if hasattr(model, "best_params_"):
+                st.json(model.best_params_)
+            else:
+                st.write("This SVM model was trained without hyperparameter tuning.")
+
 
         st.write("---")
         st.subheader("Notes")
