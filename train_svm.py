@@ -21,7 +21,7 @@ def train_svm():
     # Build preprocessor on features only (no 'income')
     preprocessor, _, _ = build_preprocessor(df.drop(columns=["income"]))
 
-    svm = LinearSVC(kernel="rbf")
+    svm = LinearSVC()
 
     pipe = Pipeline(steps=[
         ("preprocessor", preprocessor),
