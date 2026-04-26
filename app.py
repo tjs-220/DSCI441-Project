@@ -82,7 +82,11 @@ def main():
             evaluate_model_streamlit(model, X_test, y_test, model_name="SVM")
 
             st.subheader("Best Hyperparameters (SVM)")
-            st.json(model.best_params_)
+            if hasattr(model, "best_params_"):
+                st.json(model.best_params_)
+            else:
+                st.write("This SVM model was trained without hyperparameter tuning.")
+
 
         else:
             st.write("Training **Random Forest** with GridSearchCV...")
